@@ -2,8 +2,7 @@ package com.globallogic.ejerciciobci.service;
 
 import com.globallogic.ejerciciobci.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,5 +15,14 @@ public interface UserServiceClient {
 
     @PostMapping(value = "user/save")
     public UserDto userSave(UserDto userDto);
+
+    @PutMapping(value = "user/update")
+    public UserDto userUpdate(UserDto userDto);
+
+    @GetMapping(value = "user/by-id/{id}")
+    public UserDto userById(@PathVariable Long id);
+
+    @DeleteMapping(value = "user/delete")
+    public void userDelete(Long id);
 
 }

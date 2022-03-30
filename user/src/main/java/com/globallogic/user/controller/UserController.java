@@ -28,17 +28,16 @@ public class UserController {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    /*
     @GetMapping("/by-id/{id}")
     public ResponseEntity<UserDto> user(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
-*/
+
     @PostMapping("/save")
     public ResponseEntity<UserDto> userSave(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.userSave(userDto));
        }
-/*
+
     @PutMapping("/update")
     public ResponseEntity<UserDto> userUpdate(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.update(userDto));
@@ -49,5 +48,5 @@ public class UserController {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    */
+
 }

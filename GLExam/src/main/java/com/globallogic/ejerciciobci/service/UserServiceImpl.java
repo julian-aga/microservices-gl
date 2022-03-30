@@ -1,8 +1,6 @@
 package com.globallogic.ejerciciobci.service;
 
 import com.globallogic.ejerciciobci.dto.UserDto;
-import com.globallogic.ejerciciobci.entity.User;
-import com.globallogic.ejerciciobci.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,32 +11,26 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.time.ZoneOffset.UTC;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-    final UserRepository userRepository;
+//    final UserRepository userRepository;
     final UserServiceClient userServiceClient;
     final ModelMapper mapper;
 
     @Override
     public UserDto userSave(UserDto userDto) {
-
-        //User user = mapper.map(userDto, User.class);
         userDto.setToken(this.createToken(userDto.getEmail()));
-        //ahi pegarle a feign
         return userServiceClient.userSave(userDto);
-        //return mapper.map(userRepository.save(user), UserDto.class);
     }
 
     @Override
     public UserDto update(UserDto userDto) {
-        User user2 = mapper.map(userDto, User.class);
-        return mapper.map(userRepository.save(user2), UserDto.class);
+        return userServiceClient.userUpdate(userDto);
     }
 
     @Override
@@ -48,12 +40,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto findById(Long id) {
-        User user = userRepository.findById(id).orElse(new User());
-        return mapper.map(user,UserDto.class);
+        return userServiceClient.userById(id);
     }
+
     @Override
     public void deleteById(Long id) {
-        userRepository.findById(id);
+        userServiceClient.userDelete(id);
     }
 
     private String createToken(String username) {
