@@ -23,27 +23,27 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<UserDto>> users() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/by-id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDto> user(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<UserDto> userSave(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.userSave(userDto));
        }
 
-    @PutMapping("/update")
+    @PutMapping
     public ResponseEntity<UserDto> userUpdate(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.update(userDto));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity userDelete(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);

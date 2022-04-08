@@ -10,16 +10,16 @@ import java.util.List;
 public interface UserServiceClient {
 
 
-    @GetMapping(value = "user/users")
+    @GetMapping(value = "user/")
     public List<UserDto> getUsers();
 
-    @PostMapping(value = "user/save")
+    @PostMapping(value = "user/")
     public UserDto userSave(UserDto userDto);
 
-    @PutMapping(value = "user/update")
+    @PutMapping(value = "user/")
     public UserDto userUpdate(UserDto userDto);
 
-    @GetMapping(value = "user/by-id/{id}")
+    @GetMapping(value = "user/{id}")
     public UserDto userById(@PathVariable Long id);
 
     @DeleteMapping(value = "user/delete")
