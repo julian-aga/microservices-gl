@@ -12,4 +12,7 @@ public interface UserService {
     UserDto findById(Long id);
     void deleteById(Long id);
 
+    Object addPhone(String phone);
+
+    Object findPhone(Long id, Long phoneId);
 }

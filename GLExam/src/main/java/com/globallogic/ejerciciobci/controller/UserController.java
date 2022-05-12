@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserService userService;
@@ -32,6 +33,16 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> user(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> user(@RequestParam String phone) {
+        return new ResponseEntity<>(userService.addPhone(phone), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/phones/{phoneId}")
+    public ResponseEntity<Object> user(@PathVariable("id") Long id, @PathVariable("phoneId") Long phoneId) {
+        return new ResponseEntity<>(userService.findPhone(id,phoneId), HttpStatus.OK);
     }
 
     @PostMapping

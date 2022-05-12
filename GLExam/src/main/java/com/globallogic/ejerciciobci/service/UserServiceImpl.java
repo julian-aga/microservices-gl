@@ -48,6 +48,16 @@ public class UserServiceImpl implements UserService {
         userServiceClient.userDelete(id);
     }
 
+    @Override
+    public Object addPhone(String phone) {
+        return null;
+    }
+
+    @Override
+    public Object findPhone(Long id, Long phoneId) {
+        return null;
+    }
+
     private String createToken(String username) {
         Claims claims = Jwts.claims().setSubject(username);
         Date expiration = Date.from(LocalDateTime.now(UTC).plusMinutes(60).toInstant(UTC));
